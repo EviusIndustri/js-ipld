@@ -9,9 +9,10 @@ const rlp = require('rlp')
 const BlockService = require('ipfs-block-service')
 const loadFixture = require('aegir/fixtures')
 const async = require('async')
-const cidForHash = require('eth-hash-to-cid')
 const EthBlockHeader = require('ethereumjs-block/header')
 const EthTrieNode = require('merkle-patricia-tree/trieNode')
+const multihashes = require('multihashes')
+const CID = require('cids')
 
 const IPLDResolver = require('../src')
 
@@ -71,10 +72,12 @@ module.exports = (repo) => {
           default: throw new Error('Unknown type!')
         }
 
+        const multihash =  multihashes.encode(node.hash(), 'keccak-256')
+        const cid = new CID(1, type, multihash)
         return {
           raw: rawData,
           node: node,
-          cid: cidForHash(type, node.hash())
+          cid: cid
         }
       }
 
