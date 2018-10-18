@@ -51,6 +51,8 @@ Want to get started? Check our examples folder. You can check the development st
     - [`.remove(cid, callback)`](#removecid-callback)
     - [`.support.add(multicodec, formatResolver, formatUtil)`](#supportaddmulticodec-formatresolver-formatutil)
     - [`.support.rm(multicodec)`](#supportrmmulticodec)
+    - [Properties](#properties)
+      - [`defaultOptions`](#defaultoptions)
 - [Packages](#packages)
 - [Contribute](#contribute)
 - [License](#license)
@@ -115,6 +117,23 @@ const blockService = new IpfsBlockService(repo)
 const ipld = new Ipld({blockService: blockService})
 ```
 
+##### `options.formats`
+
+| Type | Default |
+|------|---------|
+| Array of [IPLD Format](https://github.com/ipld/interface-ipld-format) implementations | `[require('ipld-dag-cbor'), require('ipld-dag-pb')]` |
+
+Example if you only want to have support for [ipld-git](https://github.com/ipld/js-ipld-git):
+
+```js
+const ipldGit = require('ipld-git')
+
+const ipld = new Ipld({
+  formats: [ipldGit],
+  …
+})
+```
+
 ### `.put(node, options, callback)`
 
 > Store the given node of a recognized IPLD Format.
@@ -160,6 +179,12 @@ const ipld = new Ipld({blockService: blockService})
 ### `.support.rm(multicodec)`
 
 > Removes support of an IPLD Format
+
+### Properties
+
+#### `defaultOptions`
+
+> Default options for IPLD.
 
 ## Packages
 
