@@ -3,10 +3,6 @@
   "version": "0.0.1",
   "description": "Forked IPLD by Evius",
   "main": "src/index.js",
-  "pre-push": [
-    "lint",
-    "test"
-  ],
   "scripts": {
     "lint": "aegir lint",
     "build": "aegir build",

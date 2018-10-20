@@ -424,14 +424,10 @@ class IPLDResolver {
  * @param {function(Error, IPLDResolver)} callback
  * @returns {void}
  */
-IPLDResolver.inMemory = function (callback) {
-  const mainPath = joinPath(osHomeDir, '.serph')
-  const mainDir = pathExist(mainPath)
-  if (!mainDir) {
-    createDir(mainPath)
-  }
-  const inMemDir = joinPath(mainPath, 'in-memory')
-  const repo = new IPFSRepo(inMemDir, {
+IPLDResolver.inMemory = function (callback, customDir) {
+	let mainPath = 'in-memory'
+	if (customDir) mainPath = joinPath(customDir, mainPath)
+  const repo = new IPFSRepo(mainPath, {
     storageBackends: {
       root: MemoryStore,
       blocks: MemoryStore,
