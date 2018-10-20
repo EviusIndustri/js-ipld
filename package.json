@@ -1,8 +1,7 @@
 {
-  "name": "ipld",
-  "version": "0.18.0",
-  "description": "The JavaScript Implementation of IPLD",
-  "leadMaintainer": "Volker Mische <volker.mische@gmail.com>",
+  "name": "@evius/ipld",
+  "version": "0.0.1",
+  "description": "Forked IPLD by Evius",
   "main": "src/index.js",
   "pre-push": [
     "lint",

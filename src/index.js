@@ -8,6 +8,8 @@ const IPFSRepo = require('ipfs-repo')
 const BlockService = require('ipfs-block-service')
 const joinPath = require('path').join
 const osPathSep = require('path').sep
+const osHomeDir = require('os').homedir
+const pathExist = require('fs').existsSync
 const pullDeferSource = require('pull-defer').source
 const pullTraverse = require('pull-traverse')
 const map = require('async/map')
@@ -422,7 +424,13 @@ class IPLDResolver {
  * @returns {void}
  */
 IPLDResolver.inMemory = function (callback) {
-  const repo = new IPFSRepo('in-memory', {
+	const mainPath = joinPath(osHomeDir, '.serph')
+	const mainDir = pathExist(mainPath)
+	if(!mainDir) {
+		mkdirSync(mainPath)
+	}
+	const inMemDir = path.join(mainPath, 'in-memory')
+  const repo = new IPFSRepo(inMemDir, {
     storageBackends: {
       root: MemoryStore,
       blocks: MemoryStore,
